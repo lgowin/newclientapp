@@ -1,0 +1,24 @@
+<%= simple_form_for (@client), :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :firstname, label: "First Name" %>
+  <%= error_span(@client[:firstname]) %>
+  <%= f.input :lastname, label: "Last Name" %>
+  <%= error_span(@client[:lastname]) %>
+  <%= f.input :homephone, label: "Home Phone" %>
+  <%= error_span(@client[:homephone]) %>
+  <%= f.input :cellphone, label: "Mobile Phone" %>
+  <%= error_span(@client[:cellphone]) %>
+  <%= f.input :email %>
+  <%= error_span(@client[:email]) %>
+  <%= f.input :referral %>
+  <%= error_span(@client[:referral]) %>
+  <%= f.input :insurance %>
+  <%= error_span(@client[:insurance]) %>
+  <%= f.input :clientnotes %>
+  <%= error_span(@client[:clientnotes]) %>
+  <%= f.input :active, as: :boolean %>
+  <%= error_span(@client[:active]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                clients_path, :class => 'btn btn-default' %>
+<% end %>

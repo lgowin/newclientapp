@@ -1,0 +1,44 @@
+
+<b><center>Income Summary</center></b>
+<%= link_to "Export Income to Excel", financials_path(format: "xls") %><br><br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= "Date Service" %></th>
+      <th><%= "Client" %></th>
+      <th><%= "Insurance" %></th>
+      <th><%= "Copay Owed" %></th>
+      <th><%= "Copay Paid" %></th>
+      <th><%= "Insurance Owed" %></th>
+      <th><%= "Insurance Paid" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><%= number_to_currency(Session.sum(:copayowed), :precision => 2) %></td>
+      <td><%= number_to_currency(Session.sum(:copayd), :precision => 2) %></td>
+      <td><%= number_to_currency(Session.sum(:claimowed), :precision => 2) %></td>
+      <td><%= number_to_currency(Session.sum(:claimpd), :precision => 2) %></td>
+    </tr>
+    <% @sessions.each do |session| %>
+      <tr>
+        <td><%= session.dateservice %></td>
+        <td><% clid = session.client_id %>
+            <%= link_to (Client.find_by_id(clid).fullname), client_path(clid) %></td>
+        <td><% clid = session.client_id %>
+            <%= Client.find_by_id(clid).insurance %></td>
+        <td><%= number_to_currency(session.copayowed, :precision =>2) %></td>
+        <td><%= number_to_currency(session.copayd, :precision =>2) %></td>
+        <td><%= number_to_currency(session.claimowed, :precision =>2) %></td>
+        <td><%= number_to_currency(session.claimpd, :precision =>2) %></td>
+        <td>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

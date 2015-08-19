@@ -1,0 +1,33 @@
+<%= simple_form_for ([@client, @session]), :html => { :class => 'form-horizontal' } do |f| %>
+<table>
+  <tr>
+    <td><%= f.input :dateservice, :as => :date_picker, label: "Session Date" %>
+        <%= error_span(@session[:dateservice]) %></td>
+    <td><%= f.input :copayowed, label: "Client Copay Owed" %>
+        <%= error_span(@session[:copayowed]) %></td>
+    <td><%= f.input :copayd, label: "Client Copay Paid" %>
+        <%= error_span(@session[:copayd]) %></td>
+  </tr>
+  <tr>  
+    <td><%= f.input :claimsubmit, :as => :date_picker, label: "Claim Submit Date" %>
+        <%= error_span(@session[:claimsubmit]) %></td>
+    <td><%= f.input :claimrecvd, :as => :date_picker, label: "Claim Paid Date" %>
+        <%= error_span(@session[:claimrecvd]) %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><%= f.input :claimowed, label: "Insurance Claim Owed" %>
+        <%= error_span(@session[:claimowed]) %></td>
+    <td><%= f.input :claimpd, label: "Insurance Claim Paid" %>
+        <%= error_span(@session[:claimpd]) %></td>
+    <td>
+    </td>
+  </tr>
+</table>
+  <%= f.input :sessionnotes, label: "Session Notes", :input_html => { :rows => 3, :cols =>120 } %>
+  <%= error_span(@session[:sessionnotes]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                client_sessions_path, :class => 'btn btn-default' %>
+<% end %>

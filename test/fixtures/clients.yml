@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  firstname: MyString
+  lastname: MyString
+  homephone: MyString
+  cellphone: MyString
+  email: MyString
+  referral: MyString
+  insurance: MyString
+  inspay: 9.99
+  copay: 9.99
+  clientnotes: MyText
+  active: 
+
+two:
+  firstname: MyString
+  lastname: MyString
+  homephone: MyString
+  cellphone: MyString
+  email: MyString
+  referral: MyString
+  insurance: MyString
+  inspay: 9.99
+  copay: 9.99
+  clientnotes: MyText
+  active: 

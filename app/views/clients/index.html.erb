@@ -1,0 +1,66 @@
+<h2>Active Clients</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Home Phone</th>
+      <th>Mobile Phone</th>
+      <th>Copay Owed</th>
+      <th>Insurance Owed</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @clients.each do |client| %>
+    <% if client.active == "1" %>
+      <tr>
+        <td></td>
+        <td><%= link_to (client.fullname), client_path(client) %></td>
+        <td><%= number_to_phone(client.homephone, :area_code => true) %></td>
+        <td><%= number_to_phone(client.cellphone, :area_code => true) %></td>
+        <td><%= number_to_currency(client.sessions.sum(:copayowed), :precision => 2) %></td>
+        <td><%= number_to_currency(client.sessions.sum(:claimowed), :precision => 2) %></td>
+        <td></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_client_path,
+    :class => 'btn btn-primary btn-xs' %>
+
+<br>
+<br>
+<h2>Inactive Clients</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Home Phone</th>
+      <th>Mobile Phone</th>
+      <th>Copay Owed</th>
+      <th>Insurance Owed</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @clients.each do |client| %>
+    <% if client.active == "0" %>
+      <tr>
+        <td></td>
+        <td><%= link_to (client.fullname), client_path(client) %></td>
+        <td><%= number_to_phone(client.homephone, :area_code => true) %></td>
+        <td><%= number_to_phone(client.cellphone, :area_code => true) %></td>
+        <td><%= number_to_currency(client.sessions.sum(:copayowed), :precision => 2) %></td>
+        <td><%= number_to_currency(client.sessions.sum(:claimowed), :precision => 2) %></td>
+        <td></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>

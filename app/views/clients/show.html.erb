@@ -1,0 +1,110 @@
+<%- model_class = Client -%>
+<h1><%= @client.fullname %></h1>
+<table>
+ <col width="120">
+ <col width="200">
+ <col width="150">
+ <col width="150">
+ <col width="170">
+ <col width="100">
+
+  <tr>
+    <td><b>Home Phone: </b></td>
+    <td><%= number_to_phone(@client.homephone, :area_code => true) %></td>
+    <td><b>Insurance Provider: </b></td>
+    <td><%= @client.insurance %></td>
+    <td><b>Client Copay Owed: </b></td>
+    <td><%= number_to_currency(@client.sessions.sum(:copayowed), :precision => 2) %></td>
+  </tr>
+  <tr>
+    <td><b>Mobile Phone: </b></td>
+    <td><%= number_to_phone(@client.cellphone, :area_code => true) %><br></td>
+    <td><b>Referral: </b></td>
+    <td><%= @client.referral %></td>
+    <td><b>Insurace Claim Owed: </b></td>
+    <td><%= number_to_currency(@client.sessions.sum(:claimowed), :precision => 2) %></td>
+</tr>
+  <tr>
+    <td><b>Email: </b></td>
+    <td><%= @client.email %><br></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b>Status: </b></td>
+    <td><% if @client.active == "1" %>
+        <%= "Active" %>
+        <% else %>
+        <%= "Inactive" %>
+        <% end %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+<br>
+<h4>Client Notes</h4>
+<%= @client.clientnotes %>
+<br>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+    edit_client_path(@client), :class => 'btn btn-info btn-xs' %>
+<br>
+
+<h2>Sessions</h2>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+                    new_client_session_path(@client), :class => 'btn btn-info btn-xs' %></td>
+  
+<table class="table table-bordered" bgcolor="#FFFFE0">
+ <col width="100">
+ <col width="50">
+ <col width="50">
+ <col width="120">
+ <col width="120">
+ <col width="50">
+ <col width="50">
+ <col width="350">
+ <col width="20">
+  <tr>
+    <th>Date</th>
+    <th>Copay Owed</th>
+    <th>Copay Received</th>
+    <th>Claim Submit</th>
+    <th>Claim Received</th>
+    <th>Claim Owed</th>
+    <th>Claim Paid</th>
+    <th>Session Notes</th>
+    <th></th>
+  </tr>
+<% for session in @client.sessions.sort{|a, b| b.dateservice <=> a.dateservice} %>
+  <tr>
+    <td><%= link_to (session.dateservice), edit_client_session_path(@client, session) %></td>
+    <td><%= number_to_currency(session.copayowed, :precision =>2) %></td>
+    <td><%= number_to_currency(session.copayd, :precision =>2) %></td>
+    <td><%= session.claimsubmit %></td>
+    <td><%= session.claimrecvd %></td>
+    <td><%= number_to_currency(session.claimowed, :precision =>2) %></td>
+    <td><%= number_to_currency(session.claimpd, :precision =>2) %></td>
+    <td><%= session.sessionnotes %></td>
+    <td><%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          client_session_path(@client, session), 
+          :method => 'delete',
+          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+          :class => 'btn btn-danger btn-xs' %></td>
+
+  </tr>
+<% end%>
+<br />
+
+</table>
+<br>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+    client_path(@client),
+    :method => 'delete',
+    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+    :class => 'btn btn-danger btn-xs' %>
+<br>
+<br>

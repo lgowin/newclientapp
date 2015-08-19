@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dateservice: 2015-01-18
+  copayowed: 9.99
+  copayd: 9.99
+  claimsubmit: 2015-01-18
+  claimrecvd: 2015-01-18
+  claimowed: 9.99
+  claimpd: 9.99
+  cptcode: 1
+  sessionnotes: MyText
+  client_id: 1
+
+two:
+  dateservice: 2015-01-18
+  copayowed: 9.99
+  copayd: 9.99
+  claimsubmit: 2015-01-18
+  claimrecvd: 2015-01-18
+  claimowed: 9.99
+  claimpd: 9.99
+  cptcode: 1
+  sessionnotes: MyText
+  client_id: 1

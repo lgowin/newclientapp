@@ -1,0 +1,35 @@
+<%- model_class = Expense -%>
+<br>
+<%= link_to "Export Expenses to Excel", expenses_path(format: "xls") %><br><br>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_expense_path,
+            :class => 'btn btn-primary btn-xs' %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= "Expense Date" %></th>
+      <th><%= "Vendor" %></th>
+      <th><%= "Description" %></th>
+      <th><%= "Amount" %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @expenses.each do |expense| %>
+      <tr>
+        <td><%= link_to (expense.expensedate), edit_expense_path(expense) %></td>
+        <td><%= expense.vendor %></td>
+        <td><%= expense.expensedesc %></td>
+        <td><%= number_to_currency(expense.expense, :preciesion =>2) %></td>
+        <td>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      expense_path(expense),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
