@@ -4,7 +4,8 @@ class FinancialsController < ApplicationController
   # GET /financials
   # GET /financials.json
   def index
-    @sessions = Session.all
+    @sessions = Session.all.order( 'dateservice DESC' )
+
     respond_to do |format|
       format.html
       format.csv { send_data @sessions.to_csv }

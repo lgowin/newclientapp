@@ -4,7 +4,7 @@ class ExpensesController < ApplicationController
   # GET /expenses
   # GET /expenses.json
   def index
-    @expenses = Expense.all
+    @expenses = Expense.all.order( 'expensedate DESC' )
     respond_to do |format|
       format.html
       format.csv { send_data @expenses.to_csv }
