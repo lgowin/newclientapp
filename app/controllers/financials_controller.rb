@@ -4,7 +4,7 @@ class FinancialsController < ApplicationController
   # GET /financials
   # GET /financials.json
   def index
-    @sessions = Session.all.order( 'dateservice DESC' )
+    @sessions = Session.all.order( 'dateservice DESC' ).paginate(:page => params[:page], :per_page => 100)
 
     respond_to do |format|
       format.html

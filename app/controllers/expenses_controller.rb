@@ -4,7 +4,8 @@ class ExpensesController < ApplicationController
   # GET /expenses
   # GET /expenses.json
   def index
-    @expenses = Expense.all.order( 'expensedate DESC' )
+    @expenses = Expense.all.order( 'expensedate DESC' ).paginate(:page => params[:page], :per_page => 100)
+  #     @expenses = Expense.all.order( 'expensedate DESC' ).paginate(:per_page => 50, :page => params[:page])
     respond_to do |format|
       format.html
       format.csv { send_data @expenses.to_csv }
