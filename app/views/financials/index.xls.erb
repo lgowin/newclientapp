@@ -1,0 +1,16 @@
+<table border="1">
+  <tr>
+    <th>Date of Service</th>
+    <th>Copay Paid</th>
+    <th>Claim Received Date</th>
+    <th>Claim Paid</th>
+  </tr>
+    <% @sessions.each do |session| %>
+  <tr>
+    <td><%= session.dateservice %></td>
+    <td><%= session.copayd %></td>
+    <td><%= session.claimrecvd %></td>
+    <td><%= session.claimpd %></td>
+  <% end %>
+  </tr>
+</table>
